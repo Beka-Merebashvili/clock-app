@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import bgDayTime from "../assets/mobile/bg-image-daytime.jpg";
 import bgNightTime from "../assets/mobile/bg-image-nighttime.jpg";
+import bgDayTimeDesktop from "../assets/desktop/bg-image-daytime.jpg";
+import bgNightTimeDesktop from "../assets/desktop/bg-image-nighttime.jpg";
 import sunIcon from "../assets/desktop/icon-sun.svg";
 import moonIcon from "../assets/desktop/icon-moon.svg";
 import arrowUpIcon from "../assets/desktop/icon-arrow-up.svg"
@@ -143,6 +145,19 @@ opacity: 0.5;
     width: 100%;
     transform: ${props => !props.additional && "rotate(180deg)" } ;
     transform-style: preserve-3d;
+  }
+
+  @media only screen and (min-width: 768px){
+    padding:  ${(props)=> props.additional ? "152px 0 0 64px" :  "500px 0 0 64px"}  ;
+  background-image: url(${props => props.isDark ? bgNightTimeDesktop : bgDayTimeDesktop});
+  .greetings{
+    width: 320px;
+  }
+  .greetings p {
+font-size: 18px;
+line-height: 28px;
+letter-spacing: 3.6px;
+  }
   }
 `;
 
