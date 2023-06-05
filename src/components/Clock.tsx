@@ -18,6 +18,16 @@ const datetime = datetimeString ? new Date(datetimeString) : new Date();
 const timeOptions: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit", hour12: false };
 const formattedTime = datetime.toLocaleTimeString([], timeOptions);
 
+
+
+// const formattedTimezone = new Date().toLocaleString('en-US', {
+//   timeZone: props.clockData?.timezone,
+// });
+
+// const [city, region] = formattedTimezone.split(', ');
+
+
+
   return (
     <>
     <StyledContainer isDark={isDark} additional={additional}>
@@ -26,10 +36,11 @@ const formattedTime = datetime.toLocaleTimeString([], timeOptions);
             setIsDark(!isDark)
         }}>
             <img src={isDark ? moonIcon : sunIcon} />
-            <p>{isDark ? "good evening" : "good morning"}</p>
+            <p className="morning">{isDark ? "good evening" : "good morning"}</p>
+            {/* <p className="currently morning">it's currently</p> */}
         </div>
       <p className="time">{formattedTime}</p>
-      <p>{props.clockData?.timezone}</p>
+      {/* <p>in {city}, {region}</p> */}
       <div className="less-more">
         <p>{additional ? "less" : "more"}</p>
         <div className="arrow" onClick={() => {
@@ -95,8 +106,9 @@ const StyledContainer = styled.div<{isDark:boolean , additional:boolean}> `
     display: flex;
     align-items: center;
     gap: 16px;
+    /* background-color: black; */
   }
-  .greetings p {
+  .morning{
     font-weight: 400;
 font-size: 15px;
 line-height: 25px;
@@ -105,7 +117,11 @@ align-items: flex-end;
 letter-spacing: 3px;
 text-transform: uppercase;
 color: #FFFFFF;
+/* background-color: yellow; */
   }
+  /* .currently{
+    display: none;
+  } */
   .time {
     font-weight: 700;
     font-size: 100px;
@@ -147,17 +163,20 @@ opacity: 0.5;
     transform-style: preserve-3d;
   }
 
-  @media only screen and (min-width: 768px){
+  @media only screen and (min-width: 1440px){
     padding:  ${(props)=> props.additional ? "152px 0 0 64px" :  "500px 0 0 64px"}  ;
   background-image: url(${props => props.isDark ? bgNightTimeDesktop : bgDayTimeDesktop});
   .greetings{
     width: 320px;
   }
-  .greetings p {
+  .morning{
 font-size: 18px;
 line-height: 28px;
 letter-spacing: 3.6px;
   }
+  /* .currently{
+    display: block;
+  } */
   }
 `;
 
@@ -196,5 +215,9 @@ display: flex;
 align-items: flex-end;
 text-align: right;
 color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"} ;
+}
+
+@media only screen and (min-width: 1440px){
+  
 }
 `
