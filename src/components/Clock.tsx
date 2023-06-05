@@ -20,11 +20,8 @@ const formattedTime = datetime.toLocaleTimeString([], timeOptions);
 
 
 
-// const formattedTimezone = new Date().toLocaleString('en-US', {
-//   timeZone: props.clockData?.timezone,
-// });
-
-// const [city, region] = formattedTimezone.split(', ');
+const formattedTimezone = props.clockData?.timezone.split("/").reverse().join(", ")
+ 
 
 
 
@@ -36,11 +33,10 @@ const formattedTime = datetime.toLocaleTimeString([], timeOptions);
             setIsDark(!isDark)
         }}>
             <img src={isDark ? moonIcon : sunIcon} />
-            <p className="morning">{isDark ? "good evening" : "good morning"}</p>
-            {/* <p className="currently morning">it's currently</p> */}
+            <p>{isDark ? "good evening" : "good morning"} <span>, it's currently</span> </p>
         </div>
       <p className="time">{formattedTime}</p>
-      {/* <p>in {city}, {region}</p> */}
+      <p>in {formattedTimezone} </p>
       <div className="less-more">
         <p>{additional ? "less" : "more"}</p>
         <div className="arrow" onClick={() => {
@@ -108,7 +104,7 @@ const StyledContainer = styled.div<{isDark:boolean , additional:boolean}> `
     gap: 16px;
     /* background-color: black; */
   }
-  .morning{
+  .greetings p{
     font-weight: 400;
 font-size: 15px;
 line-height: 25px;
@@ -119,9 +115,9 @@ text-transform: uppercase;
 color: #FFFFFF;
 /* background-color: yellow; */
   }
-  /* .currently{
+  span {
     display: none;
-  } */
+  }
   .time {
     font-weight: 700;
     font-size: 100px;
@@ -167,16 +163,16 @@ opacity: 0.5;
     padding:  ${(props)=> props.additional ? "152px 0 0 64px" :  "500px 0 0 64px"}  ;
   background-image: url(${props => props.isDark ? bgNightTimeDesktop : bgDayTimeDesktop});
   .greetings{
-    width: 320px;
+    width: 500px;
   }
-  .morning{
+  .greetings p{
 font-size: 18px;
 line-height: 28px;
 letter-spacing: 3.6px;
   }
-  /* .currently{
+  span {
     display: block;
-  } */
+  }
   }
 `;
 
@@ -218,6 +214,15 @@ color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"} ;
 }
 
 @media only screen and (min-width: 1440px){
-  
+  height: 440px;
+  padding: 10px 0 0 64px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 80px;
+}
+.additionalInfo{
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 `
