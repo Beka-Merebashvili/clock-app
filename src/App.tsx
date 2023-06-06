@@ -1,5 +1,4 @@
 import { useEffect , useState} from "react" ;
-import styled from "styled-components";
 import GlobalStyles from "./styled-components/GlobalStyles";
 import axios from "axios";
 import Clock from "./components/Clock";

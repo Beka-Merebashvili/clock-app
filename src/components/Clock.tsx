@@ -33,10 +33,13 @@ const formattedTimezone = props.clockData?.timezone.split("/").reverse().join(",
             setIsDark(!isDark)
         }}>
             <img src={isDark ? moonIcon : sunIcon} />
-            <p>{isDark ? "good evening" : "good morning"} <span>, it's currently</span> </p>
+            <p>{isDark ? "good evening" : "good morning"} <span>, it's currently</span></p>
         </div>
-      <p className="time">{formattedTime}</p>
-      <p>in {formattedTimezone} </p>
+        <div className="formatedTime">
+        <p className="time">{formattedTime}</p>
+        <p className="bts">bts</p>
+        </div>
+      <p className="timeZone">in {formattedTimezone} </p>
       <div className="less-more">
         <p>{additional ? "less" : "more"}</p>
         <div className="arrow" onClick={() => {
@@ -48,10 +51,11 @@ const formattedTimezone = props.clockData?.timezone.split("/").reverse().join(",
       </div>
 
         {additional ? <AdditionalInfoContainer isDark={isDark}>
-      <div className="additionalInfo">
+          <div className="container">
+          <div className="additionalInfo">
         <p className="additional">current timezone</p>
         <p className="info">{props.clockData?.timezone}</p>
-      </div>
+      </div> 
       <div className="additionalInfo">
         <p className="additional">day of the year</p>
         <p className="info">{props.clockData?.day_of_year}</p>
@@ -64,6 +68,7 @@ const formattedTimezone = props.clockData?.timezone.split("/").reverse().join(",
         <p className="additional">week number</p>
         <p className="info">{props.clockData?.week_number}</p>
       </div>
+          </div>
      </AdditionalInfoContainer> : null }
 
     </StyledContainer>
@@ -118,6 +123,11 @@ color: #FFFFFF;
   span {
     display: none;
   }
+  .formatedTime{
+    display: flex;
+    align-items: flex-end;
+    gap: 18px;
+  }
   .time {
     font-weight: 700;
     font-size: 100px;
@@ -125,6 +135,23 @@ color: #FFFFFF;
     letter-spacing: -2.5px;
     color: #ffffff;
     margin: 16px 0 ;
+  }
+  .bts {
+    font-weight: 300;
+font-size: 15px;
+line-height: 28px;
+text-transform: uppercase;
+color: #FFFFFF;
+margin-bottom: 26px;
+  }
+  .timeZone {
+    font-weight: 700;
+font-size: 15px;
+line-height: 28px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: #FFFFFF;
+margin-bottom: 48px;
   }
   .less-more {
     width: 116px;
@@ -159,7 +186,7 @@ opacity: 0.5;
     transform-style: preserve-3d;
   }
 
-  @media only screen and (min-width: 1440px){
+  @media only screen and (min-width: 768px){
     padding:  ${(props)=> props.additional ? "152px 0 0 64px" :  "500px 0 0 64px"}  ;
   background-image: url(${props => props.isDark ? bgNightTimeDesktop : bgDayTimeDesktop});
   .greetings{
@@ -182,14 +209,16 @@ const AdditionalInfoContainer = styled.div<{isDark:boolean}>`
   height: 256px;
   background: ${(props)=> props.isDark ? "rgba(0, 0, 0, 0.75)" :  "rgba(255, 255, 255, 0.75)"} ;
 backdrop-filter:   blur(20.3871px);
-display: flex;
-flex-direction: column;
-gap: 16px;
 padding: 48px 26px 0 26px;
 position: absolute;
 bottom: 0;
 left: 0;
 z-index: 3;
+.container {
+  display: flex;
+flex-direction: column;
+gap: 16px;
+}
 .additionalInfo{
   display: flex;
   align-items: center;
@@ -207,22 +236,33 @@ color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"}
   font-weight: 700;
 font-size: 20px;
 line-height: 24px;
-display: flex;
-align-items: flex-end;
-text-align: right;
 color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"} ;
 }
 
-@media only screen and (min-width: 1440px){
-  height: 440px;
+@media only screen and (min-width: 768px){
   padding: 10px 0 0 64px;
-  flex-direction: row;
+
+  .container {
+    /* background-color: red; */
+    width: 500px;
+    flex-direction: row;
   flex-wrap: wrap;
   gap: 80px;
-}
-.additionalInfo{
+  }
+  .additionalInfo{
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 }
+.additionalInfo{
+font-size: 13px;
+line-height: 28px;
+letter-spacing: 2.6px;
+}
+.info{
+  font-size: 40px;
+  line-height: 48px;
+}
+}
+
 `
