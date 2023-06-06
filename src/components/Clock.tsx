@@ -6,6 +6,7 @@ import bgNightTimeDesktop from "../assets/desktop/bg-image-nighttime.jpg";
 import sunIcon from "../assets/desktop/icon-sun.svg";
 import moonIcon from "../assets/desktop/icon-moon.svg";
 import arrowUpIcon from "../assets/desktop/icon-arrow-up.svg"
+import refreshIcon from "../assets/desktop/icon-refresh.svg"
 import { useState } from "react";
 
 export default function Clock(props: ClockPropsType) {
@@ -13,11 +14,15 @@ export default function Clock(props: ClockPropsType) {
 const [isDark , setIsDark] = useState(false);
 const [additional , setAdditional] = useState(false);
 
+
+const handleClick = () => {
+  window.location.reload();
+};
+
 const datetimeString = props.clockData?.datetime;
 const datetime = datetimeString ? new Date(datetimeString) : new Date(); 
 const timeOptions: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit", hour12: false };
 const formattedTime = datetime.toLocaleTimeString([], timeOptions);
-
 
 
 const formattedTimezone = props.clockData?.timezone.split("/").reverse().join(", ")
@@ -29,6 +34,10 @@ const formattedTimezone = props.clockData?.timezone.split("/").reverse().join(",
     <>
     <StyledContainer isDark={isDark} additional={additional}>
       <div className="relative">
+        <div className="refresh">
+        <p>“The science of operations, as derived from mathematics more especially, is a science of itself, and has its own abstract truth and value.”</p>
+        <img src={refreshIcon}  onClick={handleClick} />
+        </div>
         <div className="greetings" onClick={() => {
             setIsDark(!isDark)
         }}>
@@ -101,6 +110,21 @@ const StyledContainer = styled.div<{isDark:boolean , additional:boolean}> `
   .relative {
     position: relative;
     z-index: 3;
+  }
+  .refresh {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .refresh p {
+    font-weight: 400;
+font-size: 12px;
+line-height: 22px;
+width: 290px;
+color: #FFFFFF;
+  }
+  .refresh img {
+    object-fit: none;
   }
   .greetings{
     width: 200px;
@@ -240,14 +264,15 @@ color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"} ;
 }
 
 @media only screen and (min-width: 768px){
-  padding: 10px 0 0 64px;
+  height: 440px;
+  padding: 120px 0 0 64px;
 
   .container {
-    /* background-color: red; */
     width: 500px;
     flex-direction: row;
   flex-wrap: wrap;
-  gap: 80px;
+  justify-content: space-between;
+  gap: 50px;
   }
   .additionalInfo{
   flex-direction: column;
