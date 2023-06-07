@@ -8,6 +8,6 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
 }
-`
+`;
 
-export default GlobalStyles ;
+export default GlobalStyles;

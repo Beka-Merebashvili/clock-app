@@ -14,28 +14,27 @@ export default function Clock(props: ClockPropsType) {
 const [isDark , setIsDark] = useState(false);
 const [additional , setAdditional] = useState(false);
 
-
+// page refresh function
 const handleClick = () => {
   window.location.reload();
 };
 
+// datatime information format
 const datetimeString = props.clockData?.datetime;
 const datetime = datetimeString ? new Date(datetimeString) : new Date(); 
 const timeOptions: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit", hour12: false };
 const formattedTime = datetime.toLocaleTimeString([], timeOptions);
 
-
+// timezone information format
 const formattedTimezone = props.clockData?.timezone.split("/").reverse().join(", ")
  
-
-
 
   return (
     <>
     <StyledContainer isDark={isDark} additional={additional}>
       <div className="relative">
        { !additional ? <div className="refresh">
-        <p>“The science of operations, as derived from mathematics more especially, is a science of itself, and has its own abstract truth and value.”</p>
+        <p>“The science of operations, as derived from mathematics more especially, is a science of itself, and has its own abstract truth and value.” <br /> <span>Ada Lovelace</span></p>
         <img src={refreshIcon}  onClick={handleClick} />
         </div> : null }
         <div className="greetings" onClick={() => {
@@ -118,10 +117,13 @@ const StyledContainer = styled.div<{isDark:boolean , additional:boolean}> `
   }
   .refresh p {
     font-weight: 400;
-font-size: 12px;
-line-height: 22px;
-width: 290px;
-color: #FFFFFF;
+    font-size: 12px;
+    line-height: 22px;
+    width: 290px;
+    color: #FFFFFF;
+  }
+  .refresh span {
+    font-weight: 700;
   }
   .refresh img {
     object-fit: none;
@@ -135,15 +137,15 @@ color: #FFFFFF;
   }
   .greetings p{
     font-weight: 400;
-font-size: 15px;
-line-height: 25px;
-display: flex;
-align-items: flex-end;
-letter-spacing: 3px;
-text-transform: uppercase;
-color: #FFFFFF;
+    font-size: 15px;
+    line-height: 25px;
+    display: flex;
+    align-items: flex-end;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #FFFFFF;
   }
-  span {
+  .greetings span {
     display: none;
   }
   .formatedTime{
@@ -161,20 +163,20 @@ color: #FFFFFF;
   }
   .bts {
     font-weight: 300;
-font-size: 15px;
-line-height: 28px;
-text-transform: uppercase;
-color: #FFFFFF;
-margin-bottom: 26px;
+    font-size: 15px;
+    line-height: 28px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-bottom: 26px;
   }
   .timeZone {
     font-weight: 700;
-font-size: 15px;
-line-height: 28px;
-letter-spacing: 3px;
-text-transform: uppercase;
-color: #FFFFFF;
-margin-bottom: 48px;
+    font-size: 15px;
+    line-height: 28px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-bottom: 48px;
   }
   .less-more {
     width: 116px;
@@ -189,13 +191,13 @@ margin-bottom: 48px;
   }
   .less-more p {
     font-weight: 700;
-font-size: 12px;
-line-height: 14px;
-letter-spacing: 3.75px;
-text-transform: uppercase;
-color: #000000;
-mix-blend-mode: normal;
-opacity: 0.5;
+   font-size: 12px;
+   line-height: 14px;
+   letter-spacing: 3.75px;
+   text-transform: uppercase;
+   color: #000000;
+   mix-blend-mode: normal;
+   opacity: 0.5;
   }
   .arrow {
     width: 32px;
@@ -212,14 +214,19 @@ opacity: 0.5;
   @media only screen and (min-width: 768px){
     padding:  ${(props)=> props.additional ? "152px 0 0 64px" :  "80px 0 0 64px"}  ;
   background-image: url(${props => props.isDark ? bgNightTimeDesktop : bgDayTimeDesktop});
+  .refresh p {
+    font-size: 18px;
+    line-height: 28px;
+    width: 540px;
+  }
   .greetings{
-    width: 500px;
+     width: 500px;
      margin-top: ${(props)=> !props.additional ? "388px" :  "0"} 
   }
   .greetings p{
-font-size: 18px;
-line-height: 28px;
-letter-spacing: 3.6px;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 3.6px;
   }
   span {
     display: block;
@@ -232,16 +239,16 @@ const AdditionalInfoContainer = styled.div<{isDark:boolean}>`
   width: 100%;
   height: 256px;
   background: ${(props)=> props.isDark ? "rgba(0, 0, 0, 0.75)" :  "rgba(255, 255, 255, 0.75)"} ;
-backdrop-filter:   blur(20.3871px);
-padding: 48px 26px 0 26px;
-position: absolute;
-bottom: 0;
-left: 0;
-z-index: 3;
+  backdrop-filter:   blur(20.3871px);
+  padding: 48px 26px 0 26px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
 .container {
   display: flex;
-flex-direction: column;
-gap: 16px;
+  flex-direction: column;
+  gap: 16px;
 }
 .additionalInfo{
   display: flex;
@@ -250,17 +257,17 @@ gap: 16px;
 }
 .additional{
   font-weight: 400;
-font-size: 10px;
-line-height: 28px;
-letter-spacing: 2px;
-text-transform: uppercase;
-color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"}
+  font-size: 10px;
+  line-height: 28px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"}
 }
 .info {
   font-weight: 700;
-font-size: 20px;
-line-height: 24px;
-color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"} ;
+  font-size: 20px;
+  line-height: 24px;
+  color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"} ;
 }
 
 @media only screen and (min-width: 768px){
@@ -270,9 +277,9 @@ color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"} ;
   .container {
     width: 500px;
     flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 50px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 50px;
   }
   .additionalInfo{
   flex-direction: column;
@@ -280,10 +287,10 @@ color: ${(props)=> props.isDark ? "#FFFFFF" :  "#303030"} ;
   align-items: flex-start;
 }
 .additionalInfo{
-font-size: 13px;
-line-height: 28px;
-letter-spacing: 2.6px;
-}
+  font-size: 13px;
+  line-height: 28px;
+  letter-spacing: 2.6px;
+  }
 .info{
   font-size: 40px;
   line-height: 48px;
