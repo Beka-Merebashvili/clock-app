@@ -34,10 +34,10 @@ const formattedTimezone = props.clockData?.timezone.split("/").reverse().join(",
     <>
     <StyledContainer isDark={isDark} additional={additional}>
       <div className="relative">
-        <div className="refresh">
+       { !additional ? <div className="refresh">
         <p>“The science of operations, as derived from mathematics more especially, is a science of itself, and has its own abstract truth and value.”</p>
         <img src={refreshIcon}  onClick={handleClick} />
-        </div>
+        </div> : null }
         <div className="greetings" onClick={() => {
             setIsDark(!isDark)
         }}>
@@ -88,7 +88,7 @@ const formattedTimezone = props.clockData?.timezone.split("/").reverse().join(",
 const StyledContainer = styled.div<{isDark:boolean , additional:boolean}> `
   width: 100%;
   height: 100vh;
-  padding:  ${(props)=> props.additional ? "100px 0 0 26px" :  "350px 0 0 26px"}  ;
+  padding:  ${(props)=> props.additional ? "100px 0 0 26px" :  "32px 0 0 26px"}  ;
   background-image: url(${props => props.isDark ? bgNightTime : bgDayTime});
   background-repeat: no-repeat;
   background-size: cover;
@@ -131,7 +131,7 @@ color: #FFFFFF;
     display: flex;
     align-items: center;
     gap: 16px;
-    /* background-color: black; */
+    margin-top: ${(props)=> !props.additional ? "227px" :  "0"}  ;
   }
   .greetings p{
     font-weight: 400;
@@ -142,7 +142,6 @@ align-items: flex-end;
 letter-spacing: 3px;
 text-transform: uppercase;
 color: #FFFFFF;
-/* background-color: yellow; */
   }
   span {
     display: none;
@@ -211,10 +210,11 @@ opacity: 0.5;
   }
 
   @media only screen and (min-width: 768px){
-    padding:  ${(props)=> props.additional ? "152px 0 0 64px" :  "500px 0 0 64px"}  ;
+    padding:  ${(props)=> props.additional ? "152px 0 0 64px" :  "80px 0 0 64px"}  ;
   background-image: url(${props => props.isDark ? bgNightTimeDesktop : bgDayTimeDesktop});
   .greetings{
     width: 500px;
+     margin-top: ${(props)=> !props.additional ? "388px" :  "0"} 
   }
   .greetings p{
 font-size: 18px;
