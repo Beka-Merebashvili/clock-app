@@ -127,6 +127,7 @@ const StyledContainer = styled.div<{isDark:boolean , additional:boolean}> `
   }
   .refresh img {
     object-fit: none;
+    cursor: pointer;
   }
   .greetings{
     width: 200px;
@@ -134,6 +135,7 @@ const StyledContainer = styled.div<{isDark:boolean , additional:boolean}> `
     align-items: center;
     gap: 16px;
     margin-top: ${(props)=> !props.additional ? "227px" :  "0"}  ;
+    cursor: pointer;
   }
   .greetings p{
     font-weight: 400;
@@ -209,6 +211,7 @@ const StyledContainer = styled.div<{isDark:boolean , additional:boolean}> `
     width: 100%;
     transform: ${props => !props.additional && "rotate(180deg)" } ;
     transform-style: preserve-3d;
+    cursor: pointer;
   }
 
   @media only screen and (min-width: 768px){
@@ -220,7 +223,7 @@ const StyledContainer = styled.div<{isDark:boolean , additional:boolean}> `
     width: 540px;
   }
   .greetings{
-     width: 500px;
+     width: 446px;
      margin-top: ${(props)=> !props.additional ? "388px" :  "0"} 
   }
   .greetings p{
@@ -228,7 +231,7 @@ const StyledContainer = styled.div<{isDark:boolean , additional:boolean}> `
     line-height: 28px;
     letter-spacing: 3.6px;
   }
-  span {
+  .greetings span {
     display: block;
   }
   }
