@@ -11,7 +11,7 @@ function App() {
       const response = await axios.get(
         "http://worldtimeapi.org/api/timezone/Asia/Tbilisi"
       );
-      const data = response.data;
+      const data = await response.data;
       SetClockDate(data);
     };
     request();
